@@ -23,9 +23,9 @@ class SingleSwitchTopo(Topo):
             self.addLink(host, switch,
                bw=10, delay='5ms', loss=10, max_queue_size=1000, use_htb=True)
 
-def perfTest():
+def perfTest(d =2, f = 3):
     "Create network and run simple performance test"
-    topo = TreeTopo( depth=2, fanout=3 )
+    topo = TreeTopo( depth=d, fanout=f )
     net = Mininet( topo=topo, controller=lambda name: RemoteController(name, ip='127.0.0.1'))
     net.start()
     hosts = net.hosts
