@@ -2,6 +2,7 @@
 
 import sys
 import argparse
+from mininet.topolib import TreeNet
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.node import CPULimitedHost
@@ -25,7 +26,7 @@ class SingleSwitchTopo(Topo):
 
 def perfTest(d =2, f = 3):
     "Create network and run simple performance test"
-    topo = TreeTopo( depth=d, fanout=f )
+    topo = TreeNet( depth=d, fanout=f )
     net = Mininet( topo=topo, controller=lambda name: RemoteController(name, ip='127.0.0.1'))
     net.start()
     hosts = net.hosts
