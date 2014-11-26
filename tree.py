@@ -5,9 +5,7 @@ import argparse
 from mininet.topolib import TreeNet
 from mininet.topo import Topo
 from mininet.net import Mininet
-from mininet.node import CPULimitedHost
-from mininet.link import TCLink
-from mininet.util import dumpNodeConnections
+from mininet.node import OVSSwitch, Controller, RemoteController
 
 
 
@@ -26,8 +24,11 @@ class SingleSwitchTopo(Topo):
 
 def perfTest(d =2, f = 3):
     "Create network and run simple performance test"
+    c = RemoteController( 'c', ip='127.0.0.1' )
     topo = TreeNet( depth=d, fanout=f )
-    net = Mininet( topo=topo, controller=lambda name: RemoteController(name, ip='127.0.0.1'))
+    net = Mininet( topo=topo)
+    net.addController(c)
+    net.build()
     net.start()
     hosts = net.hosts
     for h in hosts:
