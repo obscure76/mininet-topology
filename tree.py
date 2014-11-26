@@ -44,3 +44,4 @@ if __name__ == '__main__':
     depth = int(args.depth)
     fanout = int(args.fanout)
     perfTest(depth, fanout)
+    print('Tada!!!')
