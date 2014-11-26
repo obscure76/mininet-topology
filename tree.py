@@ -41,6 +41,6 @@ if __name__ == '__main__':
     parser.add_argument('depth', help='The depth of the tree topology')
     parser.add_argument('fanout', help='The fanout of each node in the topology')
     args = parser.parse_args()
-    depth = args.depth
-    fanout = args.fanout
+    depth = int(args.depth)
+    fanout = int(args.fanout)
     perfTest(depth, fanout)
