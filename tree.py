@@ -10,26 +10,13 @@ from mininet.node import OVSSwitch, Controller, RemoteController
 
 
 
-class SingleSwitchTopo(Topo):
-    "Single switch connected to n hosts."
-    def __init__(self, n=2, **opts):
-        Topo.__init__(self, **opts)
-        switch = self.addSwitch('s1')
-        for h in range(n):
-            # Each host gets 50%/n of system CPU
-            host = self.addHost('h%s' % (h + 1),
-               cpu=.5/n)
-            # 10 Mbps, 5ms delay, 10% loss, 1000 packet queue
-            self.addLink(host, switch,
-               bw=10, delay='5ms', loss=10, max_queue_size=1000, use_htb=True)
-
 def perfTest(d =2, f = 3):
     "Create network and run simple performance test"
     c = RemoteController( 'c', ip='127.0.0.1' )
     topo = TreeTopo( depth=d, fanout=f )
-    net = Mininet( topo=topo)
-    net.addController(c)
-    net.build()
+    net = Mininet( topo=topo,controller=lambda name: RemoteController(name, ip='127.0.0.1'))
+    #net.addController(c)
+    #net.build()
     net.start()
     hosts = net.hosts
     for h in hosts:
