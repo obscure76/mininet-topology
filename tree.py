@@ -20,9 +20,10 @@ def perfTest(d =2, f = 3):
     net.start()
     hosts = net.hosts
     for h in hosts:
-        if str(h) != 'h1' or str(h)!= 'h2':
+        if str(h) == 'h1' or str(h)== 'h2':
+            pass
+        else:
             print(h)
-        print(str(h))
     net.stop()
 
 if __name__ == '__main__':
