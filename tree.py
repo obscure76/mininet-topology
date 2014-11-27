@@ -19,10 +19,15 @@ def perfTest(d =2, f = 3):
     #net.build()
     net.start()
     hosts = net.hosts
+    cmd = '`ping 10.0.0.123`'
     for h in hosts:
         if str(h) == 'h1' or str(h)== 'h2':
+            #actual traffic
+            h.CLI()
             pass
         else:
+            #ping unknown
+            h.cmd( cmd )
             print(h)
     net.stop()
 
